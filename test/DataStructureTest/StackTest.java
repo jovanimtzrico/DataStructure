@@ -12,8 +12,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import stackStructure.Stack;
-import stackStructure.StackImp;
+import com.Structure.Data.Interfaces.Stack;
+import com.Structure.Data.Impl.StackImp;
 
 /**
  *
@@ -44,7 +44,7 @@ public class StackTest {
     }
 
     @Test
-    public void testStack() {
+    public void stackTest() {
         assertNotNull(theStack);
         theStack.push(3);
         assertEquals(theStack.peek(), Integer.valueOf(3));

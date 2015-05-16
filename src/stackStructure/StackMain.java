@@ -5,6 +5,9 @@
  */
 package stackStructure;
 
+import com.Structure.Data.Interfaces.Stack;
+import com.Structure.Data.Impl.StackImp;
+
 /**
  *
  * @author Jovani

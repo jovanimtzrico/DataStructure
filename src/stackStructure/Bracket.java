@@ -5,6 +5,8 @@
  */
 package stackStructure;
 
+import com.Structure.Data.Interfaces.Stack;
+import com.Structure.Data.Impl.StackImp;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

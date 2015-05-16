@@ -3,17 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package queueStructure;
+package com.Structure.Data.Interfaces;
 
 /**
  *
  * @author Jovani
  */
 public interface Queue <T>{
-    void insert();
-    T revome();
+    void enqueue(T data);
+    void enqueue(T... data);
+    T dequeue();
+    boolean dequeue(T data);
     T peekFront();
     boolean isEmpty();
-    boolean isFull();
     int size();
 }

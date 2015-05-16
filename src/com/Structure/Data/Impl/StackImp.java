@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package stackStructure;
+package com.Structure.Data.Impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.Structure.Data.Interfaces.Stack;
 
 /**
  *
