@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.Structure.Data.Impl;
+package com.algorithms.data.structures.impl;
+
+import com.algorithms.data.structures.Stack;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.Structure.Data.Interfaces.Stack;
 
 /**
- *
  * @author Jovani
  */
 public class StackImp<T> implements Stack<T> {
