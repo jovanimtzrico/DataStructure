@@ -6,6 +6,7 @@ package DataStructureTest;
  * and open the template in the editor.
  */
 
+import com.Structure.Data.Impl.StackImp;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -13,7 +14,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import com.Structure.Data.Interfaces.Stack;
-import com.Structure.Data.Impl.StackImp;
 
 /**
  *
@@ -36,7 +36,7 @@ public class StackTest {
 
     @Before
     public void setUp() {
-        theStack = new StackImp();
+        theStack = new StackImp<Integer>();
     }
 
     @After

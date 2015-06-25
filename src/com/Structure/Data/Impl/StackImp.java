@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.Structure.Data.Impl;
+    package com.Structure.Data.Impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ import com.Structure.Data.Interfaces.Stack;
  */
 public class StackImp<T> implements Stack<T> {
 
-    List<T> stackList;
+    private final List<T> stackList;
 
     public StackImp() {
         stackList = new ArrayList<T>();

@@ -13,42 +13,47 @@ import java.util.List;
  *
  * @author Jovani
  */
-public class PriorityQueueImpl<T> implements PriorityQueue<T>{
-    List<Element> queue;
-    Element<T> element;
+public class PriorityQueueImpl<T> implements PriorityQueue<T> {
+
+    private final List<Element> queue;
+    private Element<T> element;
 
     public PriorityQueueImpl() {
         queue = new ArrayList<>();
     }
 
-    
     @Override
-    public void enqueue(T data,int priority) {
+    public void enqueue(T data, int priority) {
         element = new Element(data, priority);
-        int position=0;
-        for(position=0; position<size(); position++){
-            if(queue.get(position).getPriority()<priority){
+        int position = 0;
+        for (position = 0; position < size(); position++) {
+            if (queue.get(position).getPriority() < priority) {
                 break;
             }
         }
-        queue.add(position,element);
-    }
-
-    @Override
-    public T dequeue() {
-        return (T) queue.remove(0).getData();
+        queue.add(position, element);
     }
 
     @Override
     public boolean dequeue(T data) {
         boolean isDequeue = false;
         for (int i = 0; i < queue.size(); i++) {
-            if(queue.get(i).getData().equals(data)){
+            if (queue.get(i).getData().equals(data)) {
                 queue.remove(i);
                 isDequeue = true;
             }
         }
         return isDequeue;
+    }
+
+    @Override
+    public T dequeue() {
+        try{
+            return (T) queue.remove(0).getData();
+        }catch(IndexOutOfBoundsException e){
+            System.out.println("Error");
+            return null;
+        }
     }
 
     @Override
@@ -65,8 +70,9 @@ public class PriorityQueueImpl<T> implements PriorityQueue<T>{
     public int size() {
         return queue.size();
     }
-    
+
     private class Element<T> {
+
         private T data;
         private int priority;
 

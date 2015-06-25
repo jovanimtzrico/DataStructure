@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class QueueImp<T> implements Queue<T> {
 
-    List<T> queueList;
+    private final List<T> queueList;
 
     public QueueImp(List<T> queueList) {
         this.queueList = queueList;

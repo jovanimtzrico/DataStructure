@@ -41,7 +41,7 @@ public class PriorityQueueTest {
     }
     
     @Test
-    public void hello() {
+    public void test() {
         assertTrue(theQueue.isEmpty());
         theQueue.enqueue("Hola", 1);
         theQueue.enqueue("Mundo", 3);
@@ -56,5 +56,14 @@ public class PriorityQueueTest {
         assertEquals(theQueue.size(), 4);
         assertTrue(theQueue.dequeue("Jovas"));
         assertEquals(theQueue.size(), 2);
+        assertFalse(theQueue.dequeue("Jovani"));
+        assertTrue(theQueue.dequeue("Hola"));
+        assertTrue(theQueue.dequeue("Mundo"));
+        assertFalse(theQueue.dequeue("Mundo"));
+        assertTrue(theQueue.isEmpty());
+        assertEquals(theQueue.size(), 0);
+        theQueue.dequeue();
+        
+
     }
 }

@@ -5,6 +5,7 @@
  */
 package DataStructureTest;
 
+import com.Structure.Data.Impl.QueueImp;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -12,7 +13,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import com.Structure.Data.Interfaces.Queue;
-import com.Structure.Data.Impl.QueueImp;
 
 /**
  *

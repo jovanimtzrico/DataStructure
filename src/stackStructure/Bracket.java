@@ -5,8 +5,8 @@
  */
 package stackStructure;
 
-import com.Structure.Data.Interfaces.Stack;
 import com.Structure.Data.Impl.StackImp;
+import com.Structure.Data.Interfaces.Stack;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -23,7 +23,7 @@ public class Bracket {
     private final Stack<Character> theStack;
 
     public Bracket() {
-        theStack = new StackImp();
+        theStack = new StackImp<>();
     }
 
     public void validateSpression() {
