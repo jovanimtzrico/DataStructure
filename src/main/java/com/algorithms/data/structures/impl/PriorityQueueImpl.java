@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.Structure.Data.Impl;
+package com.algorithms.data.structures.impl;
 
-import com.Structure.Data.Interfaces.PriorityQueue;
+import com.algorithms.data.structures.PriorityQueue;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author Jovani
  */
-public class PriorityQueueImpl<T> implements PriorityQueue<T>{
+public class PriorityQueueImpl<T> implements PriorityQueue<T> {
     List<Element> queue;
     Element<T> element;
 
@@ -21,17 +21,17 @@ public class PriorityQueueImpl<T> implements PriorityQueue<T>{
         queue = new ArrayList<>();
     }
 
-    
+
     @Override
-    public void enqueue(T data,int priority) {
-        element = new Element(data, priority);
-        int position=0;
-        for(position=0; position<size(); position++){
-            if(queue.get(position).getPriority()<priority){
+    public void enqueue(T data, int priority) {
+        element = new Element<>(data, priority);
+        int position = 0;
+        for (position = 0; position < size(); position++) {
+            if (queue.get(position).getPriority() < priority) {
                 break;
             }
         }
-        queue.add(position,element);
+        queue.add(position, element);
     }
 
     @Override
@@ -43,7 +43,7 @@ public class PriorityQueueImpl<T> implements PriorityQueue<T>{
     public boolean dequeue(T data) {
         boolean isDequeue = false;
         for (int i = 0; i < queue.size(); i++) {
-            if(queue.get(i).getData().equals(data)){
+            if (queue.get(i).getData().equals(data)) {
                 queue.remove(i);
                 isDequeue = true;
             }
@@ -65,7 +65,7 @@ public class PriorityQueueImpl<T> implements PriorityQueue<T>{
     public int size() {
         return queue.size();
     }
-    
+
     private class Element<T> {
         private T data;
         private int priority;

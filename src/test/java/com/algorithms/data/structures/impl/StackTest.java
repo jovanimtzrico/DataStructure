@@ -1,4 +1,4 @@
-package DataStructureTest;
+package com.algorithms.data.structures.impl;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -6,17 +6,12 @@ package DataStructureTest;
  * and open the template in the editor.
  */
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import com.algorithms.data.structures.Stack;
+import org.junit.*;
+
 import static org.junit.Assert.*;
-import com.Structure.Data.Interfaces.Stack;
-import com.Structure.Data.Impl.StackImp;
 
 /**
- *
  * @author Jovani
  */
 public class StackTest {
@@ -49,9 +44,9 @@ public class StackTest {
         theStack.push(3);
         assertEquals(theStack.peek(), Integer.valueOf(3));
         assertFalse(theStack.isEmpty());
-        assertEquals(theStack.pop(),Integer.valueOf(3));
+        assertEquals(theStack.pop(), Integer.valueOf(3));
         assertTrue(theStack.isEmpty());
         assertNull(theStack.peek());
         assertNull(theStack.pop());
-    } 
+    }
 }
