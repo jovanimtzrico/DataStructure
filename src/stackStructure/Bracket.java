@@ -5,9 +5,8 @@
  */
 package stackStructure;
 
-import com.algorithms.data.structures.Stack;
-import com.algorithms.data.structures.impl.StackImp;
-
+import com.Structure.Data.Interfaces.Stack;
+import com.Structure.Data.Impl.StackImp;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -15,15 +14,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ *
  * @author Jovani
  */
 public class Bracket {
 
-    private final Stack<Character> theStack;
     private String text;
+    private final Stack<Character> theStack;
 
     public Bracket() {
-        theStack = new StackImp<>();
+        theStack = new StackImp();
     }
 
     public void validateSpression() {
@@ -34,7 +34,7 @@ public class Bracket {
         } catch (IOException ex) {
             Logger.getLogger(Bracket.class.getName()).log(Level.SEVERE, null, ex);
         }
-        check(text.length() - 1);
+        check(text.length()-1);
     }
 
     public String getString() throws IOException {
@@ -46,7 +46,7 @@ public class Bracket {
     }
 
     public void check(int posicion) {
-        if (posicion >= 0) {
+        if (posicion >=0 ) {
             check(posicion - 1);
         } else {
             return;

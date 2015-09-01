@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.algorithms.data.structures.impl;
+package com.Structure.Data.Impl;
 
-import com.algorithms.data.structures.Queue;
-
+import com.Structure.Data.Interfaces.Queue;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 /**
+ *
  * @author Jovani
  */
 public class QueueImp<T> implements Queue<T> {
