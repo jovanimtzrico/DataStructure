@@ -5,10 +5,11 @@
  */
 package stackStructure;
 
-import com.algorithms.data.structures.Stack;
-import com.algorithms.data.structures.impl.StackImp;
+import com.Structure.Data.Interfaces.Stack;
+import com.Structure.Data.Impl.StackImp;
 
 /**
+ *
  * @author Jovani
  */
 public class StackMain {
@@ -17,8 +18,8 @@ public class StackMain {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
-        Stack<Integer> theStack = new StackImp<>();
+        
+        Stack<Integer> theStack = new StackImp();
         System.out.println("Push");
         theStack.push(23);
         theStack.push(12);
@@ -30,7 +31,7 @@ public class StackMain {
         theStack.pop();
         theStack.pop();
         theStack.display();
-
+       
         //Bracket theChecker = new Bracket();
         //theChecker.validateSpression();
     }
