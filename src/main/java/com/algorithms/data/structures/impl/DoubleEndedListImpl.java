@@ -12,60 +12,119 @@ import com.algorithms.data.structures.DoubleEndedList;
  * @author Jovani
  */
 public class DoubleEndedListImpl<E> implements DoubleEndedList<E>{
-    
-    Link first = null;
-    Link last = null;
+    Link<E> firstLink;
+    Link<E> lastLink;
 
-    
     @Override
-    public void insertFirst(E data) {
-        if(first == null){
-            
+    public void insertFirst(E element) {
+        if (firstLink == null) {
+            firstLink = new Link<>(element, null);
+            lastLink = firstLink;
+        } else {
+            firstLink = new Link<>(element, firstLink);
         }
     }
 
     @Override
-    public void insertLast(E data) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void insertLast(E element) {
+        if (isEmpty()) {
+            firstLink = new Link<>(element, null);
+            lastLink = firstLink;
+            return;
+        }
+        lastLink.setNext(new Link<>(element, null));
+        lastLink = lastLink.getNext();
+
     }
 
     @Override
-    public boolean insertAt(E data, E after) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public E removeFirst() {
+        if (!isEmpty()) {
+            Link<E> current = firstLink;
+            if (firstLink == lastLink) {
+                firstLink = null;
+                lastLink = null;
+            } else {
+                firstLink = firstLink.getNext();
+            }
+            return current.getElement();
+        }
+        return null;
     }
 
     @Override
-    public E deletefisrt() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public E removeLast() {
+
+        Link<E> current = firstLink;
+        if (isEmpty()) {
+            return null;
+        }
+        while (current.getNext() != lastLink) {
+            current = current.getNext();
+        }
+        Link<E> removeElement = lastLink;
+        lastLink = current;
+        current.setNext(null);
+        return removeElement.getElement();
     }
 
     @Override
-    public E deleteLast() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public E deleteAt(E data) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void displayList() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean removeElement(E element) {
+        Link<E> previus = firstLink;
+        Link<E> current = firstLink;
+        while (current != null) {
+            if (current.getElement().equals(element)) {
+                if (current == lastLink) {
+                    lastLink = previus;
+                }
+                previus.setNext(current.getNext());
+                return true;
+            } else {
+                previus = current;
+                current = current.getNext();
+            }
+        }
+        return false;
     }
 
     @Override
     public boolean isEmpty() {
-        return first == null;
+        return firstLink == null;
     }
 
-    
-    private class Link {
-        private Link next = null;
-        private E data = null;
-        
-        Link(E elem){
-            data = elem;
+    @Override
+    public void display() {
+        Link current = firstLink;
+
+        while (current != null) {
+            System.out.println(current.getElement());
+            current = current.getNext();
+        }
+        System.out.println("Last " + lastLink.getElement());
+    }
+
+    private class Link<E> {
+
+        private E element;
+        private Link next;
+
+        public Link(E data, Link next) {
+            this.element = data;
+            this.next = next;
+        }
+
+        /**
+         * @return the data
+         */
+        public E getElement() {
+            return element;
+        }
+
+        /**
+         * @param data the data to set
+         */
+        public void setElement(E data) {
+            this.element = data;
         }
 
         /**
@@ -82,20 +141,5 @@ public class DoubleEndedListImpl<E> implements DoubleEndedList<E>{
             this.next = next;
         }
 
-        /**
-         * @return the data
-         */
-        public E getData() {
-            return data;
-        }
-
-        /**
-         * @param data the data to set
-         */
-        public void setData(E data) {
-            this.data = data;
-        }
-        
     }
-    
 }

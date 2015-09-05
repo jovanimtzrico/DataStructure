@@ -11,69 +11,134 @@ import com.algorithms.data.structures.LinkedList;
  *
  * @author Jovani
  */
-public class LinkedListiImpl<T> implements LinkedList<T> {
+public class LinkedListiImpl<E> implements LinkedList<E> {
 
-    /**
-     * first is the first element on the List
-     */
-    private Link<T> first;
-
-    /**
-     * Class constructor.
-     */
-    public LinkedListiImpl() {
-        this.first = null;
-    }
+    Link<E> firstLink;
 
     @Override
-    public void insertFirst(T element) {
-        if (isEmpty()) {
-            first = new Link<>(element, null);
+    public void insertFirst(E element) {
+        if (firstLink == null) {
+            firstLink = new Link<>(element, null);
         } else {
-            Link<T> tempElement = new Link<>(element, first);
-            first = tempElement;
+            firstLink = new Link<>(element, firstLink);
         }
     }
 
     @Override
-    public T deleteFirst() {
+    public boolean insertAt(E element, E after) {
+        Link<E> previus = firstLink;
+        Link<E> current = firstLink;
+        while (current != null) {
+            if (current.getElement().equals(after)) {
+                previus = current;
+                current = new Link<>(element, current.getNext());
+                previus.setNext(current);
+                return true;
+            } else {
+                previus = current;
+                current = current.getNext();
+            }
+        }
+        if(isEmpty()){
+            firstLink = new Link<>(element,null);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void insertLast(E element) {
+        Link<E> previus = firstLink;
+        Link<E> current = firstLink;
+
+        if (isEmpty()) {
+            firstLink = new Link<>(element, null);
+            return;
+        }
+        while (current != null) {
+            previus = current;
+            current = current.getNext();
+        }
+        previus.setNext(new Link<>(element, current));
+    }
+
+    @Override
+    public E removeFirst() {
+        if (!isEmpty()) {
+            Link<E> current = firstLink;
+            firstLink = firstLink.getNext();
+            return current.getElement();
+        }
         return null;
     }
 
     @Override
-    public void display() {
+    public E removeLast() {
+        Link<E> previus = firstLink;
+        Link<E> current = firstLink;
+        if (isEmpty()) {
+            return null;
+        }
+        while (current.getNext() != null) {
+            previus = current;
+            current = current.getNext();
+        }
+        previus.setNext(null);
+        return current.getElement();
+    }
 
+    @Override
+    public boolean removeElement(E element) {
+        Link<E> previus = firstLink;
+        Link<E> current = firstLink;
+        while (current != null) {
+            if (current.getElement().equals(element)) {
+                previus.setNext(current.getNext());
+                return true;
+            } else {
+                previus = current;
+                current = current.getNext();
+            }
+        }
+        return false;
     }
 
     @Override
     public boolean isEmpty() {
-        return first == null;
+        return firstLink == null;
     }
 
-    /**
-     * Class. define the element of the list
-     */
-    private static class Link<E> {
+    @Override
+    public void display() {
+        Link current = firstLink;
+        while (current != null) {
+            System.out.println(current.getElement());
+            current = current.getNext();
+        }
+    }
 
-        /**
-         * element is the data item next is the next link in list
-         */
+    private class Link<E> {
+
         private E element;
         private Link next;
 
-        /**
-         * Class constructor.
-         */
-        private Link(E element, Link next) {
-            this.element = element;
+        public Link(E data, Link next) {
+            this.element = data;
             this.next = next;
         }
 
         /**
-         * @return the element
+         * @return the data
          */
         public E getElement() {
             return element;
+        }
+
+        /**
+         * @param data the data to set
+         */
+        public void setElement(E data) {
+            this.element = data;
         }
 
         /**
@@ -81,6 +146,13 @@ public class LinkedListiImpl<T> implements LinkedList<T> {
          */
         public Link getNext() {
             return next;
+        }
+
+        /**
+         * @param next the next to set
+         */
+        public void setNext(Link next) {
+            this.next = next;
         }
 
     }

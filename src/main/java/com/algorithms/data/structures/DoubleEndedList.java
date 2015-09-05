@@ -9,14 +9,19 @@ package com.algorithms.data.structures;
  *
  * @author Jovani
  */
-public interface DoubleEndedList <E>{
+public interface DoubleEndedList<E> {
 
-    void insertFirst(E data);
-    void insertLast(E data);
-    boolean insertAt(E data, E after);
-    E deletefisrt();
-    E deleteLast();
-    E deleteAt(E data);
-    void displayList();
+    void insertFirst(E element);
+
+    void insertLast(E element);
+
+    E removeFirst();
+
+    E removeLast();
+
+    boolean removeElement(E element);
+
     boolean isEmpty();
+
+    void display();
 }

@@ -9,9 +9,13 @@ package com.algorithms.data.structures;
  *
  * @author Jovani
  */
-public interface LinkedList<T> {
-    public void insertFirst(T element);
-    public T deleteFirst();
-    public void display();
-    public boolean isEmpty();
+public interface LinkedList<E> {
+    void insertFirst(E element);
+    void insertLast(E element);
+    boolean insertAt(E element,E after);
+    E removeFirst();
+    E removeLast();
+    boolean removeElement(E element);
+    boolean isEmpty();
+    void display();
 }
