@@ -3,17 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.Structure.Data.Interfaces;
+package com.algorithms.data.structures;
 
 /**
  *
  * @author Jovani
  */
-public interface Stack <T>{
-    void push(T data);
-    T pop();
-    T peek();
-    void display();
-    void display(T data);
-    boolean isEmpty();
+public interface LinkedList<T> {
+    public void insertFirst(T element);
+    public T deleteFirst();
+    public void display();
+    public boolean isEmpty();
 }
