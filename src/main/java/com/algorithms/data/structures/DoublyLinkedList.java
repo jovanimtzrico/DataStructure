@@ -12,7 +12,7 @@ package com.algorithms.data.structures;
 public interface DoublyLinkedList<E> {
     void insertFirst(E element);
     void insertLast(E element);
-    void insertAt(E element, E after);
+    boolean insertAt(E element, E after);
     E deleteFirst();
     E deleteLast();
     boolean deleteElement(E element);

@@ -18,32 +18,112 @@ public class DoublyLinkedListImpl<E> implements DoublyLinkedList<E> {
 
     @Override
     public void insertFirst(E element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (isEmpty()) {
+            firstLink = new Link<>(element, null, null);
+            lastLink = firstLink;
+        } else {
+            firstLink.setPrevious(new Link<>(element, firstLink, null));
+            firstLink = firstLink.getPrevious();
+        }
     }
 
     @Override
     public void insertLast(E element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (isEmpty()) {
+            firstLink = new Link<>(element, null, null);
+            lastLink = firstLink;
+        } else {
+            lastLink.setNext(new Link<>(element, null, lastLink));
+            lastLink = lastLink.getNext();
+        }
     }
 
     @Override
-    public void insertAt(E element, E after) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean insertAt(E element, E after) {
+        if (isEmpty()) {
+            return false;
+        } else {
+            Link<E> current = firstLink;
+            while (current != null) {
+                if (current.getElement().equals(after)) {
+                    if (current == lastLink) {
+                        current.setNext(new Link<E>(element, null, current));
+                        lastLink = current.getNext();
+                    } else {
+                        Link<E> temp = new Link<>(element, current.getNext(), current);
+                        current.getNext().setPrevious(temp);
+                        current.setNext(temp);
+                    }
+                    return true;
+                } else {
+                    current = current.getNext();
+                }
+            }
+        }
+        return false;
     }
 
     @Override
     public E deleteFirst() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (!isEmpty()) {
+            Link<E> current = firstLink;
+            if (current.getNext() != null) {
+                current.getNext().setPrevious(null);
+                firstLink = current.getNext();
+            } else {
+                firstLink = null;
+                lastLink = null;
+            }
+            return current.getElement();
+        }
+        return null;
     }
 
     @Override
     public E deleteLast() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (!isEmpty()) {
+            Link<E> current = lastLink;
+            if (current.getPrevious() == null) {
+                firstLink = null;
+                lastLink = null;
+            } else {
+                current.getPrevious().setNext(null);
+                lastLink = current.getPrevious();
+            }
+            return current.getElement();
+        }
+        return null;
     }
 
     @Override
     public boolean deleteElement(E element) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (isEmpty()) {
+            return false;
+        } else {
+            Link<E> current = firstLink;
+            while (current != null) {
+                if (current.getElement().equals(element)) {
+                    if (current == lastLink && firstLink == current) {
+                        firstLink = null;
+                        lastLink = null;
+                    } else if (current == lastLink) {
+                        lastLink = current.getPrevious();
+                        current.getPrevious().setNext(null);
+                        current.setPrevious(null);
+                    } else if (firstLink == current) {
+                        firstLink = firstLink.getNext();
+                        current.getNext().setPrevious(null);
+                    } else {
+                        current.getNext().setPrevious(current.getPrevious());
+                        current.getPrevious().setNext(current.getNext());
+                    }
+                    return true;
+                } else {
+                    current = current.getNext();
+                }
+            }
+        }
+        return false;
     }
 
     @Override
@@ -63,7 +143,11 @@ public class DoublyLinkedListImpl<E> implements DoublyLinkedList<E> {
 
     @Override
     public void displayBackward() {
-
+        Link<E> current = lastLink;
+        while (current != null) {
+            System.out.println(current.getElement());
+            current = current.getPrevious();
+        }
     }
 
     private class Link<E> {
@@ -78,9 +162,10 @@ public class DoublyLinkedListImpl<E> implements DoublyLinkedList<E> {
         /**
          * Class constructor.
          */
-        private Link(E element, Link next) {
+        public Link(E element, Link next, Link previous) {
             this.element = element;
             this.next = next;
+            this.previous = previous;
         }
 
         /**
