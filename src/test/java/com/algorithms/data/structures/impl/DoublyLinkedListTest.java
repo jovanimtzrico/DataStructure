@@ -42,27 +42,67 @@ public class DoublyLinkedListTest {
     }
     
     @Test
-    public void doublyLinkedListTest() {
+    public void InsertDeleteFirst() {
+        System.out.println("InsertDeleteFirst Test");
+        //List is empty
         assertTrue(dll.isEmpty());
+        //There are no elements in the list
         assertNull(dll.deleteFirst());
-        dll.insertLast(2);
-        assertTrue(dll.deleteElement(2));
-        dll.insertFirst(10);
-        assertSame(10, dll.deleteFirst());
-        dll.insertLast(10);
-        assertSame(10, dll.deleteLast());
-        dll.insertFirst(11);
-        dll.insertFirst(12);
-        dll.insertFirst(13);
-        dll.insertFirst(14);
-        assertSame(14, dll.deleteFirst());
-        dll.insertLast(10);
+        dll.insertFirst(3);
+        dll.insertFirst(2);
+        dll.insertFirst(1);
         assertFalse(dll.isEmpty());
-        assertSame(10, dll.deleteLast());
-        
-        dll.insertAt(14, 12);
-        dll.deleteElement(13);
+        //Display List Forward
         dll.displayForward();
-        //dll.displayBackward();
+        //Delete First
+        assertSame(1, dll.deleteFirst());
+        assertSame(2, dll.deleteFirst());
+        assertSame(3, dll.deleteFirst());
+        //List is empty
+        assertTrue(dll.isEmpty());
+    }
+    
+    @Test
+    public void insertDeleteLast() {
+        System.out.println("InsertDeleteLast Test");
+        //List is empty
+        assertTrue(dll.isEmpty());
+        //There are no elements in the list
+        assertNull(dll.deleteLast());
+        dll.insertLast(3);
+        dll.insertLast(2);
+        dll.insertLast(1);
+        assertFalse(dll.isEmpty());
+        //Display List Backward
+        dll.displayBackward();
+        //Delete First
+        assertSame(1, dll.deleteLast());
+        assertSame(2, dll.deleteLast());
+        assertSame(3, dll.deleteLast());
+        //List is empty
+        assertTrue(dll.isEmpty());
+        
+    }
+    
+    @Test
+    public void insertDeleteAt() {
+        System.out.println("InsertDeleteAt Test");
+        //List is empty
+        assertTrue(dll.isEmpty());
+        //There are no elements in the list
+        assertFalse(dll.deleteElement(2));
+        dll.insertFirst(1);
+        assertTrue(dll.insertAt(3, 1));
+        assertTrue(dll.insertAt(2, 3));
+        assertFalse(dll.insertAt(4, 5));
+        assertFalse(dll.isEmpty());
+        dll.displayForward();
+        //Delete First
+        assertTrue(dll.deleteElement(3));
+        assertTrue(dll.deleteElement(1));
+        assertTrue(dll.deleteElement(2));
+        assertFalse(dll.deleteElement(3));
+        //List is empty
+        assertTrue(dll.isEmpty());
     }
 }

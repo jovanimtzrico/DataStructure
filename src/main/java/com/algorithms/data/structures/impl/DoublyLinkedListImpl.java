@@ -19,10 +19,10 @@ public class DoublyLinkedListImpl<E> implements DoublyLinkedList<E> {
     @Override
     public void insertFirst(E element) {
         if (isEmpty()) {
-            firstLink = new Link<>(element, null, null);
+            firstLink = Link.newLink(element);
             lastLink = firstLink;
         } else {
-            firstLink.setPrevious(new Link<>(element, firstLink, null));
+            firstLink.setPrevious(Link.newLinkNext(element, firstLink));
             firstLink = firstLink.getPrevious();
         }
     }
@@ -30,34 +30,29 @@ public class DoublyLinkedListImpl<E> implements DoublyLinkedList<E> {
     @Override
     public void insertLast(E element) {
         if (isEmpty()) {
-            firstLink = new Link<>(element, null, null);
-            lastLink = firstLink;
+            insertFirst(element);
         } else {
-            lastLink.setNext(new Link<>(element, null, lastLink));
+            lastLink.setNext(Link.newLinkPrevius(element, lastLink));
             lastLink = lastLink.getNext();
         }
     }
 
     @Override
     public boolean insertAt(E element, E after) {
-        if (isEmpty()) {
-            return false;
-        } else {
+        if (!isEmpty()) {
             Link<E> current = firstLink;
             while (current != null) {
                 if (current.getElement().equals(after)) {
                     if (current == lastLink) {
-                        current.setNext(new Link<E>(element, null, current));
-                        lastLink = current.getNext();
+                        insertLast(element);
                     } else {
-                        Link<E> temp = new Link<>(element, current.getNext(), current);
+                        Link<E> temp = Link.newLinkNextPrevius(element, current.getNext(), current);
                         current.getNext().setPrevious(temp);
                         current.setNext(temp);
                     }
                     return true;
-                } else {
-                    current = current.getNext();
                 }
+                current = current.getNext();
             }
         }
         return false;
@@ -97,22 +92,14 @@ public class DoublyLinkedListImpl<E> implements DoublyLinkedList<E> {
 
     @Override
     public boolean deleteElement(E element) {
-        if (isEmpty()) {
-            return false;
-        } else {
+        if (!isEmpty()) {
             Link<E> current = firstLink;
             while (current != null) {
                 if (current.getElement().equals(element)) {
-                    if (current == lastLink && firstLink == current) {
-                        firstLink = null;
-                        lastLink = null;
+                    if (firstLink == current) {
+                        deleteFirst();
                     } else if (current == lastLink) {
-                        lastLink = current.getPrevious();
-                        current.getPrevious().setNext(null);
-                        current.setPrevious(null);
-                    } else if (firstLink == current) {
-                        firstLink = firstLink.getNext();
-                        current.getNext().setPrevious(null);
+                        deleteLast();
                     } else {
                         current.getNext().setPrevious(current.getPrevious());
                         current.getPrevious().setNext(current.getNext());
@@ -150,36 +137,20 @@ public class DoublyLinkedListImpl<E> implements DoublyLinkedList<E> {
         }
     }
 
-    private class Link<E> {
+    private final static class Link<E> {
 
         /**
          * element is the data item next is the next link in list
          */
-        private E element;
+        private final E element;
         private Link next;
         private Link previous;
-
-        /**
-         * Class constructor.
-         */
-        public Link(E element, Link next, Link previous) {
-            this.element = element;
-            this.next = next;
-            this.previous = previous;
-        }
 
         /**
          * @return the element
          */
         public E getElement() {
             return element;
-        }
-
-        /**
-         * @param element the element to set
-         */
-        public void setElement(E element) {
-            this.element = element;
         }
 
         /**
@@ -190,13 +161,6 @@ public class DoublyLinkedListImpl<E> implements DoublyLinkedList<E> {
         }
 
         /**
-         * @param next the next to set
-         */
-        public void setNext(Link next) {
-            this.next = next;
-        }
-
-        /**
          * @return the previous
          */
         public Link getPrevious() {
@@ -204,9 +168,38 @@ public class DoublyLinkedListImpl<E> implements DoublyLinkedList<E> {
         }
 
         /**
+         * @param next the next to set
+         */
+        public void setNext(Link next) {
+            this.next = next;
+        }
+
+        /**
          * @param previous the previous to set
          */
         public void setPrevious(Link previous) {
+            this.previous = previous;
+        }
+
+        public static <E>Link newLink(E element) {
+            return new Link<>(element, null, null);
+        }
+        
+        public static <E>Link newLinkNext(E element, Link next) {
+            return new Link<>(element, next, null);
+        }
+        
+        public static <E>Link newLinkPrevius(E element, Link preivus) {
+            return new Link<>(element, null, preivus);
+        }
+        
+        public static <E>Link newLinkNextPrevius(E element, Link next, Link previus) {
+            return new Link<>(element, next, previus);
+        }
+
+        private Link(E element,Link next, Link previous) {
+            this.element = element;
+            this.next = next;
             this.previous = previous;
         }
     }
