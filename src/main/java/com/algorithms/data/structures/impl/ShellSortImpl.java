@@ -13,8 +13,9 @@ import com.algorithms.data.structures.ShellSort;
  */
 public class ShellSortImpl implements ShellSort {
 
-    int[] theArray;
-    int nElems;
+    private int[] theArray;
+    private int nElems;
+    
 
     public ShellSortImpl(int max) {
         theArray = new int[max];
