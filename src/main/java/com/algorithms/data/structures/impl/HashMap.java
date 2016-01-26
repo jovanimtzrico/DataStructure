@@ -42,7 +42,7 @@ public class HashMap {
 
     public void displayTable() {
         for (int i = 0; i < arr.length; i++) {
-            //System.out.print(i + ". ");
+            System.out.print(i + ". ");
             if (arr[i] != null) {
                 arr[i].displayList();
             }

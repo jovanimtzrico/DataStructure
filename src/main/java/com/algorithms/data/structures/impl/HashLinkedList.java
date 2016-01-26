@@ -18,10 +18,12 @@ public class HashLinkedList {
             first = element;
         } else {
             Node current = first;
+            Node previus = first;
             while (current.getNext() != null) {
-                current.setNext(current.getNext());
+                previus = current;
+                current = current.getNext();
             }
-            current.setNext(element);
+            previus.setNext(element);
         }
     }
 
@@ -46,11 +48,10 @@ public class HashLinkedList {
         Node current = first;
         while (current != null) {
             if (current.getKey().equals(key)) {
-                System.out.println("current next "+current.getNext());
+                if(first.getNext() == null){
+                    first = null;
+                }
                 previus.setNext(current.getNext());
-                System.out.println("previus next "+previus.getNext());
-                System.out.println("first next "+first.getNext());
-                System.out.println("first next "+first.getKey());
                 return true;
             } else {
                 previus = current;

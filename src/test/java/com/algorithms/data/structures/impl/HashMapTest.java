@@ -43,34 +43,36 @@ public class HashMapTest {
     public void linkTest() {
         HashLinkedList list = new HashLinkedList();
         list.add(new HashLinkedList.Node("Jovani", "Rico"));
+        list.add(new HashLinkedList.Node("Jovas", "MTZ"));
         assertSame("Rico", list.get("Jovani"));
         list.displayList();
+        assertTrue(list.delete("Jovas"));
+        assertFalse(list.delete("Jovas"));
         assertTrue(list.delete("Jovani"));
-        //assertFalse(list.delete("Jovani"));
-        //assertTrue(list.delete("Jovani"));
+        assertFalse(list.delete("Jovani"));
+        assertNull(list.get("Jovani"));
         list.displayList();
     }
 
-    //@Test
+    @Test
     public void test() {
         hash = new HashMap();
-
         assertNull(hash.get("Jovani"));
-        hash.put("Jovani", "Rico");
-        assertSame("Rico", hash.get("Jovani"));
+        hash.put("ApellidoMaterno", "Rico");
+        assertSame("Rico", hash.get("ApellidoMaterno"));
         hash.put("Nombre", "Jovani");
         assertSame("Jovani", hash.get("Nombre"));
         hash.put("Apellido", "Martinez");
+        hash.put("Apellido", "Rico");
         assertSame("Martinez", hash.get("Apellido"));
         assertSame("Jovani", hash.get("Nombre"));
         hash.displayTable();
-        assertTrue(hash.delete("Jovani"));
+        assertTrue(hash.delete("ApellidoMaterno"));
         hash.displayTable();
         System.out.println("com.algorithms.data.structures.impl.HashMapTest.test()");
         System.out.println(hash.delete("Jovani"));
-        //assertFalse(hash.delete("Jovani"));
-        //assertNull(hash.get("Jovani"));
-        //hash.displayTable();
-
+        assertFalse(hash.delete("Jovani"));
+        assertNull(hash.get("Jovani"));
+        hash.displayTable();
     }
 }
